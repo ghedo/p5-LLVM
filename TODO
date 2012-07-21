@@ -1,0 +1,5 @@
+* more types (struct, array, ...)
+* more instructions
+* JIT compilation (ExecutionEngine)
+* assembly generation (TargetMachine)
+* documentation + examples
