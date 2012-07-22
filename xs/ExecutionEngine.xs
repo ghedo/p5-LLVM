@@ -15,8 +15,7 @@ new(class, mod)
 
 		RETVAL = engine;
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 GenericValue
 run_func(self, func, ...)
@@ -46,5 +45,4 @@ run_func(self, func, ...)
 
 		RETVAL = LLVMRunFunction(self, func, (items - 2), params);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL

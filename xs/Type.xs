@@ -9,8 +9,7 @@ int(class, ctx, bits)
 	CODE:
 		RETVAL = LLVMIntTypeInContext(ctx, bits);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Type
 float(class, ctx)
@@ -20,8 +19,7 @@ float(class, ctx)
 	CODE:
 		RETVAL = LLVMFloatTypeInContext(ctx);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Type
 double(class, ctx)
@@ -31,8 +29,7 @@ double(class, ctx)
 	CODE:
 		RETVAL = LLVMDoubleTypeInContext(ctx);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Type
 func(class, ret_type, ...)
@@ -58,5 +55,4 @@ func(class, ret_type, ...)
 
 		RETVAL = LLVMFunctionType(ret_type, params, items - 2, 0);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL

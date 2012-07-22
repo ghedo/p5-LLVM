@@ -7,8 +7,7 @@ type(self)
 	CODE:
 		RETVAL = LLVMTypeOf(self);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 void
 set_name(self, val_name)
@@ -45,8 +44,7 @@ func_params(self)
 
 		RETVAL = params;
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 BasicBlock
 func_append(self, ctx, block_name)
@@ -60,5 +58,4 @@ func_append(self, ctx, block_name)
 
 		RETVAL = LLVMAppendBasicBlockInContext(ctx, self, name);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL

@@ -12,8 +12,7 @@ new(class, ctx, id)
 
 		RETVAL = LLVMModuleCreateWithNameInContext(name, ctx);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 add_func(self, func_name, func_type)
@@ -29,8 +28,7 @@ add_func(self, func_name, func_type)
 
 		RETVAL = val;
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 void
 dump(self)

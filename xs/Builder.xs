@@ -14,8 +14,7 @@ new(class, ctx, blk)
 
 		RETVAL = bld;
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 # Terminators
 
@@ -27,8 +26,7 @@ ret(self, v)
 	CODE:
 		RETVAL = LLVMBuildRet(self, v);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 # Binary operations
 
@@ -41,8 +39,8 @@ add(self, lhs, rhs, inst_name)
 
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildAdd);
-	OUTPUT:
-		RETVAL
+
+	OUTPUT: RETVAL
 
 Value
 fadd(self, lhs, rhs, inst_name)
@@ -54,8 +52,7 @@ fadd(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildFAdd);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 mul(self, lhs, rhs, inst_name)
@@ -67,8 +64,7 @@ mul(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildMul);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 fmul(self, lhs, rhs, inst_name)
@@ -80,8 +76,7 @@ fmul(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildFMul);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 sub(self, lhs, rhs, inst_name)
@@ -93,8 +88,7 @@ sub(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildSub);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 fsub(self, lhs, rhs, inst_name)
@@ -106,8 +100,7 @@ fsub(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildFSub);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 udiv(self, lhs, rhs, inst_name)
@@ -119,8 +112,7 @@ udiv(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildUDiv);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 sdiv(self, lhs, rhs, inst_name)
@@ -132,8 +124,7 @@ sdiv(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildSDiv);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 fdiv(self, lhs, rhs, inst_name)
@@ -145,8 +136,7 @@ fdiv(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildFDiv);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 # Binary bitwise operations
 
@@ -160,8 +150,7 @@ shl(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildShl);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 lshr(self, lhs, rhs, inst_name)
@@ -173,8 +162,7 @@ lshr(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildLShr);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 ashr(self, lhs, rhs, inst_name)
@@ -186,8 +174,7 @@ ashr(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildAShr);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 and(self, lhs, rhs, inst_name)
@@ -199,8 +186,7 @@ and(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildAnd);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 or(self, lhs, rhs, inst_name)
@@ -212,8 +198,7 @@ or(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildOr);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 Value
 xor(self, lhs, rhs, inst_name)
@@ -225,8 +210,7 @@ xor(self, lhs, rhs, inst_name)
 	CODE:
 		STRLEN len; RETVAL = BIN_OP(LLVMBuildXor);
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 void
 DESTROY(self)

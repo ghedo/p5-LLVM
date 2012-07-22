@@ -7,8 +7,7 @@ new(class)
 	CODE:
 		RETVAL = LLVMContextCreate();
 
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 void
 DESTROY(self)

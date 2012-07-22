@@ -8,8 +8,7 @@ int(class, type, val)
 
 	CODE:
 		RETVAL = LLVMCreateGenericValueOfInt(type, val, 1);
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 GenericValue
 uint(class, type, val)
@@ -19,8 +18,7 @@ uint(class, type, val)
 
 	CODE:
 		RETVAL = LLVMCreateGenericValueOfInt(type, val, 0);
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 GenericValue
 float(class, type, val)
@@ -30,8 +28,7 @@ float(class, type, val)
 
 	CODE:
 		RETVAL = LLVMCreateGenericValueOfFloat(type, val);
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 unsigned long
 to_int(self)
@@ -39,8 +36,7 @@ to_int(self)
 
 	CODE:
 		RETVAL = LLVMGenericValueToInt(self, 1);
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 unsigned long
 to_uint(self)
@@ -48,8 +44,7 @@ to_uint(self)
 
 	CODE:
 		RETVAL = LLVMGenericValueToInt(self, 1);
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 double
 to_float(self, type)
@@ -58,8 +53,7 @@ to_float(self, type)
 
 	CODE:
 		RETVAL = LLVMGenericValueToFloat(type, self);
-	OUTPUT:
-		RETVAL
+	OUTPUT: RETVAL
 
 void
 DESTROY(self)
