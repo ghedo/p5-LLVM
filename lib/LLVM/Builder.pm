@@ -9,7 +9,8 @@ LLVM::Builder - LLVM builder class
 
 =head1 DESCRIPTION
 
-Some description here...
+A C<LLVM::Builder> is the means of building instructions and represents a point
+within a basic block.
 
 =head1 METHODS
 

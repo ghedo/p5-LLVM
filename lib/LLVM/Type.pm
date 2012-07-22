@@ -9,7 +9,7 @@ LLVM::Type - LLVM type class
 
 =head1 DESCRIPTION
 
-Some description here...
+A C<LLVM::Type> represents the type of an individual L<LLVM::Value>.
 
 =head1 METHODS
 

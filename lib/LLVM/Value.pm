@@ -9,7 +9,7 @@ LLVM::Value - LLVM value class
 
 =head1 DESCRIPTION
 
-Some description here...
+A C<LLVM::Value> represents an individual value in the LLVM IR.
 
 =head1 METHODS
 

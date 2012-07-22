@@ -9,7 +9,7 @@ LLVM::Context - LLVM context class
 
 =head1 DESCRIPTION
 
-Some description here...
+A C<LLVM::Context> is the top-level container for all LLVM global data.
 
 =head1 METHODS
 

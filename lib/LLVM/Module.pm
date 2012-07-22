@@ -9,7 +9,7 @@ LLVM::Module - LLVM module class
 
 =head1 DESCRIPTION
 
-Some description here...
+A C<LLVM::Module> is the top-level container for all the LLVM IR objects.
 
 =head1 METHODS
 
