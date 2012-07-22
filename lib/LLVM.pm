@@ -52,6 +52,20 @@ The output should look like this:
       ret i32 %tmp
     }
 
+Once the module is created, it can be compiled in-memory and executed:
+
+    # create the arguments for the function call
+    my $arg1 = LLVM::GenericValue -> int($intt, 5);
+    my $arg2 = LLVM::GenericValue -> int($intt, 10);
+
+    # create an execution engine for the module
+    my $eng = LLVM::ExecutionEngine -> new($mod);
+
+    # call the function "add" and print the result
+    my $result = $eng -> run_func($fun, $arg1, $arg2);
+
+    say $result -> to_int;
+
 =head1 DESCRIPTION
 
 The Low-Level Virtual Machine (LLVM) is a collection of libraries and tools

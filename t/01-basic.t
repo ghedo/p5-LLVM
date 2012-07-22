@@ -47,4 +47,10 @@ my $arg1 = LLVM::GenericValue -> int($intt, 10);
 my $arg2 = LLVM::GenericValue -> int($intt, 15);
 my $arg3 = LLVM::GenericValue -> int($intt, 20);
 
+my $eng = LLVM::ExecutionEngine -> new($mod);
+
+my $res = $eng -> run_func($fun, $arg1, $arg2, $arg3);
+
+is($res -> to_int, 500);
+
 done_testing;

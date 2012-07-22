@@ -13,6 +13,7 @@ typedef LLVMBasicBlockRef	BasicBlock;
 typedef LLVMBuilderRef		Builder;
 
 typedef LLVMGenericValueRef	GenericValue;
+typedef LLVMExecutionEngineRef	ExecutionEngine;
 
 MODULE = LLVM				PACKAGE = LLVM
 
@@ -25,3 +26,4 @@ INCLUDE: xs/Builder.xs
 
 # ExecutionEngine
 INCLUDE: xs/GenericValue.xs
+INCLUDE: xs/ExecutionEngine.xs

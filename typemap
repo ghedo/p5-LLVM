@@ -6,6 +6,7 @@ BasicBlock				T_LLVM_REF
 Builder					T_LLVM_REF
 
 GenericValue				T_LLVM_REF
+ExecutionEngine				T_LLVM_REF
 
 OUTPUT
 T_LLVM_REF
