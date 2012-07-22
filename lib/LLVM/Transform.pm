@@ -9,7 +9,7 @@ LLVM::Transform - LLVM transformation class
 
 =head1 DESCRIPTION
 
-Currently the following types of transformations are available:
+The following classes of transformations are available:
 
 =over 4
 

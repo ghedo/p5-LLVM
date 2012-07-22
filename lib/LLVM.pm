@@ -52,7 +52,19 @@ The output should look like this:
       ret i32 %tmp
     }
 
-Once the module is created, it can be compiled in-memory and executed:
+Once the module is created, a number of optimizations can be applied:
+
+    # create a new LLVM::PassManager
+    my $mgr = LLVM::PassManager -> new;
+
+    # schedule a couple of passes
+    $mgr -> function_inlining;
+    $mgr -> global_dce;
+
+    # run the pass manager on the module
+    $mgr -> run($mod);
+
+And finally the module can be compiled in-memory and executed:
 
     # create the arguments for the function call
     my $arg1 = LLVM::GenericValue -> int($intt, 5);

@@ -12,6 +12,8 @@ LLVM::PassManager - LLVM pass manager class
 A C<LLVM::PassManager> holds and optimizes the  execution of passes. A pass
 performs the transformations and optimizations that make up the compiler.
 
+Have a look at L<LLVM::Transform> to see what passes are available.
+
 =head1 METHODS
 
 =head2 new( )
