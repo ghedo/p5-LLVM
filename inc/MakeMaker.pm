@@ -5,7 +5,7 @@ use Devel::CheckLib;
 
 extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
 
-my $ccflags = `llvm-config-3.1 --cflags`;
+my $ccflags = `llvm-config --cflags`;
 
 override _build_MakeFile_PL_template => sub {
 	my ($self) = @_;
