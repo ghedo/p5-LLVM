@@ -6,12 +6,12 @@ use IO::CaptureOutput qw(capture);
 use LLVM;
 
 my $ctx = LLVM::Context -> new;
-my $mod = LLVM::Module -> new($ctx, "test");
+my $mod = LLVM::Module -> new($ctx, "test1");
 
 my $intt = LLVM::Type -> int($ctx, 32);
 my $funt = LLVM::Type -> func($intt, $intt, $intt, $intt);
 
-my $fun = $mod -> add_func("add", $funt);
+my $fun = $mod -> add_func("test1", $funt);
 
 my $params = $fun -> func_params;
 
@@ -31,9 +31,9 @@ my ($stdout, $stderr);
 capture { $mod -> dump } \$stdout, \$stderr;
 
 my $expected = <<'EOS';
-; ModuleID = 'test'
+; ModuleID = 'test1'
 
-define i32 @add(i32 %x, i32 %y, i32 %z) {
+define i32 @test1(i32 %x, i32 %y, i32 %z) {
 entry:
   %tmp1 = add i32 %x, %y
   %tmp2 = mul i32 %tmp1, %z

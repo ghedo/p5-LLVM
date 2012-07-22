@@ -29,6 +29,17 @@ information about the single instructions.
 Append a ret instruction to the block. This function takes a L<LLVM::Value>
 representing the value to be returned and returns a L<LLVM::Value>.
 
+=head2 ret_void( )
+
+Append a void ret instruction to the block. This function returns a L<LLVM::Value>.
+
+=head2 cond( $if, $then, $else )
+
+Append a conditional instruction to the block. This function takes a
+L<LLVM::Value> C<$if> representing the condition (e.g. it can be the value
+returned by a icmp or fcmp instruction) and two L<LLVM::BasicBlock>: the first
+executed if the condition is true, the second executed otherwise.
+
 =head1 BINARY OPERATIONS
 
 The binary operations require two arguments of the same L<LLVM::Type> and
@@ -81,29 +92,104 @@ and produce a single L<LLVM::Value>.
 See the L<LLVM reference|http://llvm.org/docs/LangRef.html#binaryops> for more
 information about the single instructions.
 
-=head2 shl( $lhs, $rhs, $name)
+=head2 shl( $lhs, $rhs, $name )
 
 Append a shift left instruction to the block and name the result C<$name>.
 
-=head2 lshr( $lhs, $rhs, $name)
+=head2 lshr( $lhs, $rhs, $name )
 
 Append a logical shift right instruction to the block and name the result C<$name>.
 
-=head2 ashr( $lhs, $rhs, $name)
+=head2 ashr( $lhs, $rhs, $name )
 
 Append an arithmetic shift right instruction to the block and name the result C<$name>.
 
-=head2 and( $lhs, $rhs, $name)
+=head2 and( $lhs, $rhs, $name )
 
 Append an and instruction to the block and name the result C<$name>.
 
-=head2 or( $lhs, $rhs, $name)
+=head2 or( $lhs, $rhs, $name )
 
 Append an or instruction to the block and name the result C<$name>.
 
-=head2 xor( $lhs, $rhs, $name)
+=head2 xor( $lhs, $rhs, $name )
 
 Append a xor instruction to the block and name the result C<$name>.
+
+=head1 OTHER OPERATIONS
+
+See the L<LLVM reference|http://llvm.org/docs/LangRef.html#otherops> for more
+information about the single instructions.
+
+=head2 icmp( $pred, $lhs, $rhs, $name )
+
+Append an integer cmp instruction to the block and name the result C<$name>. The
+predicate C<$pred> must be one of:
+
+=over 4
+
+=item "eq": equal
+
+=item "ne": not equal
+
+=item "ugt": unsigned greater than
+
+=item "uge": unsigned greater or equal
+
+=item "ult": unsigned less than
+
+=item "ule": unsigned less or equal
+
+=item "sgt": signed greater than
+
+=item "sge": signed greater or equal
+
+=item "slt": signed less than
+
+=item "sle": signed less or equal
+
+=back
+
+=head2 fcmp( $pred, $lhs, $rhs, $name )
+
+Append a float cmp instruction to the block and name the result C<$name>. The
+predicate C<$pred> must be one of:
+
+=over 4
+
+=item "false": no comparison, always returns false
+
+=item "oeq": ordered and equal
+
+=item "ogt": ordered and greater than
+
+=item "oge": ordered and greater than or equal
+
+=item "olt": ordered and less than
+
+=item "ole": ordered and less than or equal
+
+=item "one": ordered and not equal
+
+=item "ord": ordered (no nans)
+
+=item "ueq": unordered or equal
+
+=item "ugt": unordered or greater than
+
+=item "uge": unordered or greater than or equal
+
+=item "ult": unordered or less than
+
+=item "ule": unordered or less than or equal
+
+=item "une": unordered or not equal
+
+=item "uno": unordered (either nans)
+
+=item "true": no comparison, always returns true
+
+=back
 
 =head1 AUTHOR
 
