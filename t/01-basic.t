@@ -1,38 +1,46 @@
 #!perl -T
 
 use Test::More;
+use IO::CaptureOutput qw(capture);
 
 use LLVM;
 
 my $ctx = LLVM::Context -> new;
-isa_ok($ctx, 'LLVM::Context');
-
 my $mod = LLVM::Module -> new($ctx, "test");
-isa_ok($mod, 'LLVM::Module');
 
 my $intt = LLVM::Type -> int($ctx, 32);
-my $funt = LLVM::Type -> func($intt, $intt, $intt);
-isa_ok($funt, 'LLVM::Type');
+my $funt = LLVM::Type -> func($intt, $intt, $intt, $intt);
 
 my $fun = $mod -> add_func("add", $funt);
-isa_ok($fun, 'LLVM::Value');
 
 my $params = $fun -> func_params;
 
 $params -> [0] -> set_name("x");
 $params -> [1] -> set_name("y");
+$params -> [2] -> set_name("z");
 
 my $blk = $fun -> func_append($ctx, "entry");
-isa_ok($blk, 'LLVM::BasicBlock');
-
 my $bld = LLVM::Builder -> new($ctx, $blk);
-isa_ok($bld, 'LLVM::Builder');
 
-my $tmp = $bld -> add($params -> [0], $params -> [1], "tmp");
-isa_ok($tmp, 'LLVM::Value');
+my $tmp1 = $bld -> add($params -> [0], $params -> [1], "tmp1");
+my $tmp2 = $bld -> mul($tmp1, $params -> [2], "tmp2");
 
-$bld -> ret($tmp);
+$bld -> ret($tmp2);
 
-$mod -> dump;
+my ($stdout, $stderr);
+capture { $mod -> dump } \$stdout, \$stderr;
+
+my $expected = <<'EOS';
+; ModuleID = 'test'
+
+define i32 @add(i32 %x, i32 %y, i32 %z) {
+entry:
+  %tmp1 = add i32 %x, %y
+  %tmp2 = mul i32 %tmp1, %z
+  ret i32 %tmp2
+}
+EOS
+
+is($stderr, $expected);
 
 done_testing;
