@@ -70,9 +70,11 @@ Once the module is created, it can be compiled in-memory and executed:
 
 The Low-Level Virtual Machine (LLVM) is a collection of libraries and tools
 that make it easy to build compilers, optimizers, Just-In-Time code generators,
-and many other compiler-related programs.
+and many other compiler-related programs. This module provides Perl bindings to
+the LLVM API.
 
-This module provides Perl bindings to the LLVM API.
+Note that this module is currently built and tested against LLVM v3.1, but
+chances are that it builds against older versions too.
 
 =head1 AUTHOR
 
