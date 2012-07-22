@@ -4,6 +4,7 @@ Type					T_LLVM_REF
 Value					T_LLVM_REF
 BasicBlock				T_LLVM_REF
 Builder					T_LLVM_REF
+PassManager				T_LLVM_REF
 
 GenericValue				T_LLVM_REF
 ExecutionEngine				T_LLVM_REF

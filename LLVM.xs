@@ -11,6 +11,7 @@ typedef LLVMTypeRef		Type;
 typedef LLVMValueRef		Value;
 typedef LLVMBasicBlockRef	BasicBlock;
 typedef LLVMBuilderRef		Builder;
+typedef LLVMPassManagerRef	PassManager;
 
 typedef LLVMGenericValueRef	GenericValue;
 typedef LLVMExecutionEngineRef	ExecutionEngine;
@@ -23,6 +24,7 @@ INCLUDE: xs/Module.xs
 INCLUDE: xs/Type.xs
 INCLUDE: xs/Value.xs
 INCLUDE: xs/Builder.xs
+INCLUDE: xs/PassManager.xs
 
 # ExecutionEngine
 INCLUDE: xs/GenericValue.xs
