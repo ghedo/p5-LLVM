@@ -1,4 +1,5 @@
 * more types (struct, array, ...)
 * more instructions
+* more passes (transformations and analyses)
 * assembly generation (TargetMachine)
 * documentation + examples
