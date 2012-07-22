@@ -25,6 +25,8 @@ Create a new whole-module C<LLVM::PassManager>.
 Run all the passes scheduled on the given L<LLVM::Module>. Returns true if any
 of the passes modified the module, false otherwise.
 
+=for Pod::Coverage always_inliner argument_promotion constant_merge dead_arg_elimination function_attrs function_inlining global_dce global_optimizer internalize ip_constant_propagation ipsccp prune_eh strip_dead_prototypes strip_symbols
+
 =head1 AUTHOR
 
 Alessandro Ghedini <alexbio@cpan.org>
