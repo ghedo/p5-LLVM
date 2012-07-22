@@ -13,7 +13,7 @@ The following classes of transformations are available:
 
 =over 4
 
-=item LLVM::Transform::IPO - interprocedural transformations.
+=item L<LLVM::Transform::IPO> - interprocedural transformations.
 
 =back
 
