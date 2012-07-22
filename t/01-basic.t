@@ -43,4 +43,8 @@ EOS
 
 is($stderr, $expected);
 
+my $arg1 = LLVM::GenericValue -> int($intt, 10);
+my $arg2 = LLVM::GenericValue -> int($intt, 15);
+my $arg3 = LLVM::GenericValue -> int($intt, 20);
+
 done_testing;

@@ -5,6 +5,8 @@ Value					T_LLVM_REF
 BasicBlock				T_LLVM_REF
 Builder					T_LLVM_REF
 
+GenericValue				T_LLVM_REF
+
 OUTPUT
 T_LLVM_REF
 	sv_setref_pv($arg, \"LLVM::${type}\", (void *) $var);
