@@ -19,10 +19,10 @@ LLVM - Perl bindings to the Low Level Virtual Machine
     my $mod = LLVM::Module -> new($ctx, "synopsis");
 
     # create a new function type that takes 2 ints and returns one int
-    my $intt = LLVM::Type -> int($ctx);
+    my $intt = LLVM::Type -> int($ctx, 32);
     my $funt = LLVM::Type -> func($intt, $intt, $intt);
 
-    # add a new functionto the module with the just-created type
+    # add a new function to the module with the just-created type
     my $fun = $mod -> add_func("add", $funt);
 
     # set function's parameters names
