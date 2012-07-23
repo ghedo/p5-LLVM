@@ -28,6 +28,7 @@ INCLUDE: xs/Context.xs
 INCLUDE: xs/Module.xs
 INCLUDE: xs/Type.xs
 INCLUDE: xs/Value.xs
+INCLUDE: xs/Const.xs
 INCLUDE: xs/Builder.xs
 INCLUDE: xs/PassManager.xs
 
