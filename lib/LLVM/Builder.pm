@@ -33,6 +33,11 @@ representing the value to be returned and returns a L<LLVM::Value>.
 
 Append a void ret instruction to the block. This function returns a L<LLVM::Value>.
 
+=head2 br( $dest )
+
+Append a branch instruction to the block. This function takes a
+L<LLVM::BasicBlock> C<$dest>.
+
 =head2 cond( $if, $then, $else )
 
 Append a conditional instruction to the block. This function takes a
@@ -190,6 +195,17 @@ predicate C<$pred> must be one of:
 =item "true": no comparison, always returns true
 
 =back
+
+=head2 call( $func, $name [, $arg ... ] )
+
+Append a call instruction to the block and name the result C<$name>. The
+generated instruction will call the L<LLVM::Value> representing a function
+C<$func> with the given arguments of type L<LLVM::Value>.
+
+=head2 select( $if, $then, $else, $name )
+
+Append a select instruction to the block and name the result C<$name>. C<$if>,
+C<$then> and C<$else> are L<LLVM::Value>s.
 
 =head1 AUTHOR
 

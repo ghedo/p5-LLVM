@@ -38,6 +38,16 @@ ret_void(self)
 	OUTPUT: RETVAL
 
 Value
+br(self, dest)
+	Builder self
+	BasicBlock dest
+
+	CODE:
+		RETVAL = LLVMBuildBr(self, dest);
+
+	OUTPUT: RETVAL
+
+Value
 cond(self, cond, th, el)
 	Builder self
 	Value cond
@@ -328,6 +338,53 @@ fcmp(self, pred, lhs, rhs, inst_name)
 		RETVAL = LLVMBuildFCmp(
 			self, rpred, lhs, rhs, SvPVbyte(inst_name, len)
 		);
+
+	OUTPUT: RETVAL
+
+Value
+call(self, func, inst_name, ...)
+	Builder self
+	Value func
+	SV *inst_name
+
+	CODE:
+		int i;
+		STRLEN len;
+		const char *name = SvPVbyte(inst_name, len);
+
+		Value *params = malloc(sizeof(Value) * (items - 3));
+
+		for (i = 3; i < items; i++) {
+			Value param;
+			SV *arg = ST(i);
+
+			if (sv_isobject(arg) &&
+				   sv_derived_from(arg, "LLVM::Value"))
+				param = INT2PTR(Value, SvIV((SV *) SvRV(arg)));
+			else
+				Perl_croak(aTHX_
+					"arg is not of type LLVM::Value");
+
+			params[i - 3] = param;
+		}
+
+		RETVAL = LLVMBuildCall(self, func, params, (items - 3), name);
+
+	OUTPUT: RETVAL
+
+Value
+select(self, cond, th, el, inst_name)
+	Builder self
+	Value cond
+	Value th
+	Value el
+	SV *inst_name
+
+	CODE:
+		STRLEN len;
+		const char *name = SvPVbyte(inst_name, len);
+
+		RETVAL = LLVMBuildSelect(self, cond, th, el, name);
 
 	OUTPUT: RETVAL
 
