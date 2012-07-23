@@ -25,9 +25,8 @@ func_params(self)
 	Value self
 
 	CODE:
-		int i;
 		AV *params = newAV();
-		unsigned int count = LLVMCountParams(self);
+		unsigned int i, count = LLVMCountParams(self);
 
 		Value *values = malloc(sizeof(Value) * count);
 
