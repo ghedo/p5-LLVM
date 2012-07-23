@@ -18,7 +18,7 @@ override _build_MakeFile_PL_template => sub {
 override _build_WriteMakefile_args => sub {
 	return +{
 		%{ super() },
-		LIBS		=> ['-lLLVM-3.1'],
+		LIBS		=> '-lLLVM-3.1',
 		CCFLAGS		=> $ccflags,
 		INC		=> '-I.',
 		OBJECT		=> '$(O_FILES)',
