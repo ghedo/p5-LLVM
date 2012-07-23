@@ -92,6 +92,20 @@ $pass -> add("BBVectorize");
 
 $pass -> run($mod);
 
+capture { $mod -> dump } \$stdout, \$stderr;
+
+$expected = <<'EOS';
+; ModuleID = 'test1'
+
+define i32 @test1(i32, i32, i32) nounwind readnone {
+  %4 = add i32 %1, %0
+  %5 = mul i32 %4, %2
+  ret i32 %5
+}
+EOS
+
+is($stderr, $expected);
+
 my $arg1 = LLVM::GenericValue -> int($intt, 10);
 my $arg2 = LLVM::GenericValue -> int($intt, 15);
 my $arg3 = LLVM::GenericValue -> int($intt, 20);
