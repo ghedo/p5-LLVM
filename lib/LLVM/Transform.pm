@@ -100,6 +100,10 @@ information about the single transformations.
 
 =head2 BasicAliasAnalysis
 
+=head1 VECTORIZE TRANSFORMATIONS
+
+=head2 BBVectorize
+
 =head1 AUTHOR
 
 Alessandro Ghedini <alexbio@cpan.org>

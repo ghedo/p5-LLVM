@@ -88,6 +88,7 @@ $pass -> add("EarlyCSE");
 $pass -> add("LowerExpectIntrinsic");
 $pass -> add("TypeBasedAliasAnalysis");
 $pass -> add("BasicAliasAnalysis");
+$pass -> add("BBVectorize");
 
 $pass -> run($mod);
 
