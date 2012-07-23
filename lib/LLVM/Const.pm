@@ -9,7 +9,7 @@ LLVM::Const - LLVM const value class
 
 =head1 DESCRIPTION
 
-Some description here...
+A C<LLVM::Const> represents a constant value.
 
 =head1 METHODS
 
