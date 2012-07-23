@@ -133,25 +133,45 @@ predicate C<$pred> must be one of:
 
 =over 4
 
-=item "eq": equal
+=item C<"eq">
 
-=item "ne": not equal
+equal
 
-=item "ugt": unsigned greater than
+=item C<"ne">
 
-=item "uge": unsigned greater or equal
+not equal
 
-=item "ult": unsigned less than
+=item C<"ugt">
 
-=item "ule": unsigned less or equal
+unsigned greater than
 
-=item "sgt": signed greater than
+=item C<"uge">
 
-=item "sge": signed greater or equal
+unsigned greater or equal
 
-=item "slt": signed less than
+=item C<"ult">
 
-=item "sle": signed less or equal
+unsigned less than
+
+=item C<"ule">
+
+unsigned less or equal
+
+=item C<"sgt">
+
+signed greater than
+
+=item C<"sge">
+
+signed greater or equal
+
+=item C<"slt">
+
+signed less than
+
+=item C<"sle">
+
+signed less or equal
 
 =back
 
@@ -162,37 +182,69 @@ predicate C<$pred> must be one of:
 
 =over 4
 
-=item "false": no comparison, always returns false
+=item C<"false">
 
-=item "oeq": ordered and equal
+no comparison, always returns false
 
-=item "ogt": ordered and greater than
+=item C<"oeq">
 
-=item "oge": ordered and greater than or equal
+ordered and equal
 
-=item "olt": ordered and less than
+=item C<"ogt">
 
-=item "ole": ordered and less than or equal
+ordered and greater than
 
-=item "one": ordered and not equal
+=item C<"oge">
 
-=item "ord": ordered (no nans)
+ordered and greater than or equal
 
-=item "ueq": unordered or equal
+=item C<"olt">
 
-=item "ugt": unordered or greater than
+ordered and less than
 
-=item "uge": unordered or greater than or equal
+=item C<"ole">
 
-=item "ult": unordered or less than
+ordered and less than or equal
 
-=item "ule": unordered or less than or equal
+=item C<"one">
 
-=item "une": unordered or not equal
+ordered and not equal
 
-=item "uno": unordered (either nans)
+=item C<"ord">
 
-=item "true": no comparison, always returns true
+ordered (no nans)
+
+=item C<"ueq">
+
+unordered or equal
+
+=item C<"ugt">
+
+unordered or greater than
+
+=item C<"uge">
+
+unordered or greater than or equal
+
+=item C<"ult">
+
+unordered or less than
+
+=item C<"ule">
+
+unordered or less than or equal
+
+=item C<"une">
+
+unordered or not equal
+
+=item C<"uno">
+
+unordered (either nans)
+
+=item C<"true">
+
+no comparison, always returns true
 
 =back
 
