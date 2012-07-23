@@ -13,6 +13,10 @@ A C<LLVM::Type> represents the type of an individual L<LLVM::Value>.
 
 =head1 METHODS
 
+=head2 void( $ctx )
+
+Create a new C<LLVM::Type> representing a void given a L<LLVM::Context>.
+
 =head2 int( $ctx, $bits )
 
 Create a new C<LLVM::Type> representing an integer with C<$bits> bits (e.g. 16,

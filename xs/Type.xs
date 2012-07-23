@@ -1,6 +1,16 @@
 MODULE = LLVM				PACKAGE = LLVM::Type
 
 Type
+void(class, ctx)
+	SV *class
+	Context ctx
+
+	CODE:
+		RETVAL = LLVMVoidTypeInContext(ctx);
+
+	OUTPUT: RETVAL
+
+Type
 int(class, ctx, bits)
 	SV *class
 	Context ctx
