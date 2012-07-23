@@ -43,7 +43,7 @@ to_uint(self)
 	GenericValue self
 
 	CODE:
-		RETVAL = LLVMGenericValueToInt(self, 1);
+		RETVAL = LLVMGenericValueToInt(self, 0);
 	OUTPUT: RETVAL
 
 double
