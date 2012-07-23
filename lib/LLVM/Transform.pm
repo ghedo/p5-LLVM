@@ -42,6 +42,64 @@ information about the single transformations.
 
 =head2 StripSymbols
 
+=head1 SCALAR TRANSFORMATIONS
+
+=head2 AggressiveDCE
+
+=head2 CFGSimplification
+
+=head2 DeadStoreElimination
+
+=head2 GVN
+
+=head2 IndVarSimplify
+
+=head2 InstructionCombining
+
+=head2 JumpThreading
+
+=head2 LICMP
+
+=head2 LoopDeletion
+
+=head2 LoopIdiom
+
+=head2 LoopRotate
+
+=head2 LoopUnroll
+
+=head2 LoopUnswitch
+
+=head2 MemCpyOpt
+
+=head2 PromoteMemoryToRegister
+
+=head2 Reassociate
+
+=head2 SCCP
+
+=head2 ScalarReplAggregates
+
+=head2 SimplifyLibCall
+
+=head2 TailCallElimination
+
+=head2 ConstantPropagation
+
+=head2 DemoteMemoryToRegoster
+
+=head2 Verifier
+
+=head2 CorrelatedValuePropagation
+
+=head2 EarlyCSE
+
+=head2 LowerExpectIntrinsic
+
+=head2 TypeBasedAliasAnalysis
+
+=head2 BasicAliasAnalysis
+
 =head1 AUTHOR
 
 Alessandro Ghedini <alexbio@cpan.org>

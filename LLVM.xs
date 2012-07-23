@@ -3,7 +3,10 @@
 #include "XSUB.h"
 
 #include <llvm-c/Core.h>
+
 #include <llvm-c/Transforms/IPO.h>
+#include <llvm-c/Transforms/Scalar.h>
+
 #include <llvm-c/ExecutionEngine.h>
 
 typedef LLVMContextRef		Context;
