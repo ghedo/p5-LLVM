@@ -43,6 +43,26 @@ EOS
 
 is($stderr, $expected);
 
+my $pass = LLVM::PassManager -> new;
+
+$pass -> add("GlobalDCE");
+$pass -> add("ArgumentPromotion");
+$pass -> add("ConstantMerge");
+$pass -> add("DeadArgElimination");
+$pass -> add("FunctionAttrs");
+$pass -> add("FunctionInlining");
+$pass -> add("AlwaysInliner");
+$pass -> add("GlobalDCE");
+$pass -> add("GlobalOptimizer");
+$pass -> add("IPConstantPropagation");
+$pass -> add("PruneEH");
+$pass -> add("IPSCCP");
+$pass -> add("Internalize");
+$pass -> add("StripDeadPrototypes");
+$pass -> add("StripSymbols");
+
+$pass -> run($mod);
+
 my $arg1 = LLVM::GenericValue -> int($intt, 10);
 my $arg2 = LLVM::GenericValue -> int($intt, 15);
 my $arg3 = LLVM::GenericValue -> int($intt, 20);

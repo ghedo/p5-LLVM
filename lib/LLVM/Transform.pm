@@ -9,16 +9,38 @@ LLVM::Transform - LLVM transformation class
 
 =head1 DESCRIPTION
 
-The following classes of transformations are available:
-
-=over 4
-
-=item L<LLVM::Transform::IPO> - interprocedural transformations.
-
-=back
-
 See the L<LLVM reference|http://llvm.org/docs/Passes.html#transforms> for more
 information about the single transformations.
+
+=head1 INTERPROCEDURAL TRANSFORMATIONS
+
+=head2 ArgumentPromotion
+
+=head2 ConstantMerge
+
+=head2 DeadArgElimination
+
+=head2 FunctionAttrs
+
+=head2 FunctionInlining
+
+=head2 AlwaysInliner
+
+=head2 GlobalDCE
+
+=head2 GlobalOptimizer
+
+=head2 IPConstantPropagation
+
+=head2 PruneEH
+
+=head2 IPSCCP
+
+=head2 Internalize
+
+=head2 StripDeadPrototypes
+
+=head2 StripSymbols
 
 =head1 AUTHOR
 

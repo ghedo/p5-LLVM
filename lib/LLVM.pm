@@ -58,8 +58,8 @@ Once the module is created, a number of optimizations can be applied:
     my $mgr = LLVM::PassManager -> new;
 
     # schedule a couple of passes
-    $mgr -> function_inlining;
-    $mgr -> global_dce;
+    $mgr -> add("FunctionInlining");
+    $mgr -> add("GlobalDCE");
 
     # run the pass manager on the module
     $mgr -> run($mod);

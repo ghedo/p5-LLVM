@@ -1,7 +1,9 @@
 MODULE = LLVM				PACKAGE = LLVM::PassManager
 
 PassManager
-new()
+new(class)
+	SV *class
+
 	CODE:
 		RETVAL = LLVMCreatePassManager();
 
@@ -17,92 +19,45 @@ run(self, mod)
 
 	OUTPUT: RETVAL
 
-# IPO transformations
-
-void argument_promotion(self)
+void add(self, pass, ...)
 	PassManager self
+	SV *pass
 
 	CODE:
-		LLVMAddArgumentPromotionPass(self);
+		STRLEN len;
+		char *spass = SvPVbyte(pass, len);
 
-void constant_merge(self)
-	PassManager self
-
-	CODE:
-		LLVMAddConstantMergePass(self);
-
-void dead_arg_elimination(self)
-	PassManager self
-
-	CODE:
-		LLVMAddDeadArgEliminationPass(self);
-
-void function_attrs(self)
-	PassManager self
-
-	CODE:
-		LLVMAddFunctionAttrsPass(self);
-
-void function_inlining(self)
-	PassManager self
-
-	CODE:
-		LLVMAddFunctionInliningPass(self);
-
-void always_inliner(self)
-	PassManager self
-
-	CODE:
-		LLVMAddAlwaysInlinerPass(self);
-
-void global_dce(self)
-	PassManager self
-
-	CODE:
-		LLVMAddGlobalDCEPass(self);
-
-void global_optimizer(self)
-	PassManager self
-
-	CODE:
-		LLVMAddGlobalOptimizerPass(self);
-
-void ip_constant_propagation(self)
-	PassManager self
-
-	CODE:
-		LLVMAddIPConstantPropagationPass(self);
-
-void prune_eh(self)
-	PassManager self
-
-	CODE:
-		LLVMAddPruneEHPass(self);
-
-void ipsccp(self)
-	PassManager self
-
-	CODE:
-		LLVMAddIPSCCPPass(self);
-
-void internalize(self, all_but_main)
-	PassManager self
-	unsigned int all_but_main
-
-	CODE:
-		LLVMAddInternalizePass(self, all_but_main);
-
-void strip_dead_prototypes(self)
-	PassManager self
-
-	CODE:
-		LLVMAddStripDeadPrototypesPass(self);
-
-void strip_symbols(self)
-	PassManager self
-
-	CODE:
-		LLVMAddStripSymbolsPass(self);
+		# IPO transformations
+		if (strcmp(spass, "ArgumentPromotion") == 0)
+			LLVMAddArgumentPromotionPass(self);
+		else if (strcmp(spass, "ConstantMerge") == 0)
+			LLVMAddConstantMergePass(self);
+		else if (strcmp(spass, "DeadArgElimination") == 0)
+			LLVMAddDeadArgEliminationPass(self);
+		else if (strcmp(spass, "FunctionAttrs") == 0)
+			LLVMAddFunctionAttrsPass(self);
+		else if (strcmp(spass, "FunctionInlining") == 0)
+			LLVMAddFunctionInliningPass(self);
+		else if (strcmp(spass, "AlwaysInliner") == 0)
+			LLVMAddAlwaysInlinerPass(self);
+		else if (strcmp(spass, "GlobalDCE") == 0)
+			LLVMAddGlobalDCEPass(self);
+		else if (strcmp(spass, "GlobalOptimizer") == 0)
+			LLVMAddGlobalOptimizerPass(self);
+		else if (strcmp(spass, "IPConstantPropagation") == 0)
+			LLVMAddIPConstantPropagationPass(self);
+		else if (strcmp(spass, "PruneEH") == 0)
+			LLVMAddPruneEHPass(self);
+		else if (strcmp(spass, "IPSCCP") == 0)
+			LLVMAddIPSCCPPass(self);
+		else if (strcmp(spass, "Internalize") == 0)
+			LLVMAddInternalizePass(self, 1);
+		else if (strcmp(spass, "StripDeadPrototypes") == 0)
+			LLVMAddStripDeadPrototypesPass(self);
+		else if (strcmp(spass, "StripSymbols") == 0)
+			LLVMAddStripSymbolsPass(self);
+		else
+			Perl_croak(aTHX_ "invalid pass '%s'", spass);
 
 void
 DESTROY(self)
