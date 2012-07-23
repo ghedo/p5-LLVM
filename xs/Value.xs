@@ -59,3 +59,25 @@ func_append(self, ctx, block_name)
 		RETVAL = LLVMAppendBasicBlockInContext(ctx, self, name);
 
 	OUTPUT: RETVAL
+
+bool
+global_is_constant(self, ...)
+	Value self
+
+	CODE:
+		if (items == 2) LLVMSetGlobalConstant(self, SvIV(ST(1)));
+
+		RETVAL = LLVMIsGlobalConstant(self);
+
+	OUTPUT: RETVAL
+
+bool
+global_is_threadlocal(self, ...)
+	Value self
+
+	CODE:
+		if (items == 2) LLVMSetThreadLocal(self, SvIV(ST(1)));
+
+		RETVAL = LLVMIsThreadLocal(self);
+
+	OUTPUT: RETVAL
