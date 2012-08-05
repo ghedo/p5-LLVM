@@ -1,16 +1,15 @@
 MODULE = LLVM				PACKAGE = LLVM::Module
 
 Module
-new(class, ctx, id)
+new(class, id)
 	SV *class
-	Context ctx
 	SV *id
 
 	CODE:
 		STRLEN len;
 		const char *name = SvPVbyte(id, len);
 
-		RETVAL = LLVMModuleCreateWithNameInContext(name, ctx);
+		RETVAL = LLVMModuleCreateWithName(name);
 
 	OUTPUT: RETVAL
 

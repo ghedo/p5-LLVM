@@ -5,10 +5,9 @@ use IO::CaptureOutput qw(capture);
 
 use LLVM;
 
-my $ctx = LLVM::Context -> new;
-my $mod = LLVM::Module -> new($ctx, "test1");
+my $mod = LLVM::Module -> new("test1");
 
-my $intt = LLVM::Type -> int($ctx, 32);
+my $intt = LLVM::Type -> int(32);
 my $funt = LLVM::Type -> func($intt, $intt, $intt, $intt);
 
 my $fun = $mod -> add_func("test1", $funt);
@@ -19,8 +18,8 @@ $params -> [0] -> set_name("x");
 $params -> [1] -> set_name("y");
 $params -> [2] -> set_name("z");
 
-my $blk = $fun -> func_append($ctx, "entry");
-my $bld = LLVM::Builder -> new($ctx, $blk);
+my $blk = $fun -> func_append("entry");
+my $bld = LLVM::Builder -> new($blk);
 
 my $tmp1 = $bld -> add($params -> [0], $params -> [1], "tmp1");
 my $tmp2 = $bld -> mul($tmp1, $params -> [2], "tmp2");

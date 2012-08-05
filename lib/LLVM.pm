@@ -15,11 +15,10 @@ LLVM - Perl bindings to the Low Level Virtual Machine
     use LLVM;
 
     # create a new LLVM context and a module named "synopsis"
-    my $ctx = LLVM::Context -> new;
-    my $mod = LLVM::Module -> new($ctx, "synopsis");
+    my $mod = LLVM::Module -> new("synopsis");
 
     # create a new function type that takes 2 ints and returns one int
-    my $intt = LLVM::Type -> int($ctx, 32);
+    my $intt = LLVM::Type -> int(32);
     my $funt = LLVM::Type -> func($intt, $intt, $intt);
 
     # add a new function to the module with the just-created type
@@ -32,8 +31,8 @@ LLVM - Perl bindings to the Low Level Virtual Machine
     $params -> [1] -> set_name("y");
 
     # create a new entry block for the "add" function and its builder
-    my $blk = $fun -> func_append($ctx, "entry");
-    my $bld = LLVM::Builder -> new($ctx, $blk);
+    my $blk = $fun -> func_append("entry");
+    my $bld = LLVM::Builder -> new($blk);
 
     # create an "add" intruction and use its return value as function return
     my $tmp = $bld -> add($params -> [0], $params -> [1], "tmp");

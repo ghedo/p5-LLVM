@@ -3,13 +3,12 @@ MODULE = LLVM				PACKAGE = LLVM::Builder
 #define BIN_OP(FN) FN(self, lhs, rhs, SvPVbyte(inst_name, len))
 
 Builder
-new(class, ctx, blk)
+new(class, blk)
 	SV *class
-	Context ctx
 	BasicBlock blk
 
 	CODE:
-		Builder bld = LLVMCreateBuilderInContext(ctx);
+		Builder bld = LLVMCreateBuilder();
 		LLVMPositionBuilderAtEnd(bld, blk);
 
 		RETVAL = bld;

@@ -13,10 +13,9 @@ A C<LLVM::Module> is the top-level container for all the LLVM IR objects.
 
 =head1 METHODS
 
-=head2 new( $ctx, $id )
+=head2 new( $id )
 
-Create a new C<LLVM::Module> given its L<LLVM::Context> and a string
-representing its id (name).
+Create a new C<LLVM::Module> given a string representing its id (name).
 
 =head2 add_func( $func_name, $func_type )
 

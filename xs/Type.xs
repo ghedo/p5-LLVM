@@ -1,43 +1,39 @@
 MODULE = LLVM				PACKAGE = LLVM::Type
 
 Type
-void(class, ctx)
+void(class)
 	SV *class
-	Context ctx
 
 	CODE:
-		RETVAL = LLVMVoidTypeInContext(ctx);
+		RETVAL = LLVMVoidType();
 
 	OUTPUT: RETVAL
 
 Type
-int(class, ctx, bits)
+int(class, bits)
 	SV *class
-	Context ctx
 	unsigned int bits
 
 	CODE:
-		RETVAL = LLVMIntTypeInContext(ctx, bits);
+		RETVAL = LLVMIntType(bits);
 
 	OUTPUT: RETVAL
 
 Type
-float(class, ctx)
+float(class)
 	SV *class
-	Context ctx
 
 	CODE:
-		RETVAL = LLVMFloatTypeInContext(ctx);
+		RETVAL = LLVMFloatType();
 
 	OUTPUT: RETVAL
 
 Type
-double(class, ctx)
+double(class)
 	SV *class
-	Context ctx
 
 	CODE:
-		RETVAL = LLVMDoubleTypeInContext(ctx);
+		RETVAL = LLVMDoubleType();
 
 	OUTPUT: RETVAL
 

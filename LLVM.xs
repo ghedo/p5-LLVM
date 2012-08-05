@@ -10,7 +10,6 @@
 
 #include <llvm-c/ExecutionEngine.h>
 
-typedef LLVMContextRef		Context;
 typedef LLVMModuleRef		Module;
 typedef LLVMTypeRef		Type;
 typedef LLVMValueRef		Value;
@@ -24,7 +23,6 @@ typedef LLVMExecutionEngineRef	ExecutionEngine;
 MODULE = LLVM				PACKAGE = LLVM
 
 # Core
-INCLUDE: xs/Context.xs
 INCLUDE: xs/Module.xs
 INCLUDE: xs/Type.xs
 INCLUDE: xs/Value.xs

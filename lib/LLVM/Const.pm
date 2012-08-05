@@ -21,10 +21,9 @@ Create a new constant integer L<LLVM::Value> with value C<$value>.
 
 Create a new constant real L<LLVM::Value> with value C<$value>.
 
-=head2 string( $ctx, $value )
+=head2 string( $value )
 
-Create a new constant string L<LLVM::Value> with value C<$value> given a
-L<LLVM::Context>.
+Create a new constant string L<LLVM::Value> with value C<$value>.
 
 =head1 AUTHOR
 

@@ -5,10 +5,9 @@ use IO::CaptureOutput qw(capture);
 
 use LLVM;
 
-my $ctx = LLVM::Context -> new;
-my $mod = LLVM::Module -> new($ctx, "test2");
+my $mod = LLVM::Module -> new("test2");
 
-my $intt = LLVM::Type -> int($ctx, 32);
+my $intt = LLVM::Type -> int(32);
 my $funt = LLVM::Type -> func($intt, $intt, $intt);
 
 my $fun = $mod -> add_func("test2", $funt);
@@ -18,17 +17,17 @@ my $params = $fun -> func_params;
 $params -> [0] -> set_name("x");
 $params -> [1] -> set_name("y");
 
-my $blk = $fun -> func_append($ctx, "entry");
-my $bld = LLVM::Builder -> new($ctx, $blk);
+my $blk = $fun -> func_append("entry");
+my $bld = LLVM::Builder -> new($blk);
 
 my $cmp = $bld -> icmp("ugt", $params -> [0], $params -> [1], "cmp");
 
-my $true_blk = $fun -> func_append($ctx, "true");
-my $true_bld = LLVM::Builder -> new($ctx, $true_blk);
+my $true_blk = $fun -> func_append("true");
+my $true_bld = LLVM::Builder -> new($true_blk);
 $true_bld -> ret($params -> [0]);
 
-my $false_blk = $fun -> func_append($ctx, "false");
-my $false_bld = LLVM::Builder -> new($ctx, $false_blk);
+my $false_blk = $fun -> func_append("false");
+my $false_bld = LLVM::Builder -> new($false_blk);
 $false_bld -> ret($params -> [1]);
 
 $bld -> cond($cmp, $true_blk, $false_blk);

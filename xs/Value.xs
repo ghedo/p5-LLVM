@@ -46,16 +46,15 @@ func_params(self)
 	OUTPUT: RETVAL
 
 BasicBlock
-func_append(self, ctx, block_name)
+func_append(self, block_name)
 	Value self
-	Context ctx
 	SV *block_name
 
 	CODE:
 		STRLEN len;
 		const char *name = SvPVbyte(block_name, len);
 
-		RETVAL = LLVMAppendBasicBlockInContext(ctx, self, name);
+		RETVAL = LLVMAppendBasicBlock(self, name);
 
 	OUTPUT: RETVAL
 

@@ -14,10 +14,9 @@ within a basic block.
 
 =head1 METHODS
 
-=head2 new( $ctx, $blk )
+=head2 new( $blk )
 
-Create a new C<LLVM::Builder> object given a L<LLVM::Context> and a
-L<LLVM::BasicBlock>.
+Create a new C<LLVM::Builder> object given a L<LLVM::BasicBlock>.
 
 =head1 TERMINATOR INSTRUCTIONS
 

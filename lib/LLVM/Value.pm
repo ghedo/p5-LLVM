@@ -26,7 +26,7 @@ Set the name of the given C<LLVM::Value> to the C<$val_name> string.
 Retrieve the C<LLVM::Value>s of the paramenters of the given C<LLVM::Type>
 representing a function.
 
-=head2 func_append( $ctx, $blk_name )
+=head2 func_append( $blk_name )
 
 Append a L<LLVM::BasicBlock> with name C<$blk_name> to the given C<LLVM::Value>
 representing a function.
