@@ -1,7 +1,7 @@
 #!perl -T
 
 use Test::More;
-use IO::CaptureOutput qw(capture);
+use Capture::Tiny 'capture_stderr';
 
 use LLVM;
 
@@ -26,8 +26,7 @@ my $tmp2 = $bld -> mul($tmp1, $params -> [2], "tmp2");
 
 $bld -> ret($tmp2);
 
-my ($stdout, $stderr);
-capture { $mod -> dump } \$stdout, \$stderr;
+my $stderr = capture_stderr { $mod -> dump };
 
 my $expected = <<'EOS';
 ; ModuleID = 'test1'
@@ -91,7 +90,7 @@ $pass -> add("BBVectorize");
 
 $pass -> run($mod);
 
-capture { $mod -> dump } \$stdout, \$stderr;
+$stderr = capture_stderr { $mod -> dump };
 
 $expected = <<'EOS';
 ; ModuleID = 'test1'

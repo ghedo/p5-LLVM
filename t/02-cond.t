@@ -1,7 +1,7 @@
 #!perl -T
 
 use Test::More;
-use IO::CaptureOutput qw(capture);
+use Capture::Tiny 'capture_stderr';
 
 use LLVM;
 
@@ -32,8 +32,7 @@ $false_bld -> ret($params -> [1]);
 
 $bld -> cond($cmp, $true_blk, $false_blk);
 
-my ($stdout, $stderr);
-capture { $mod -> dump } \$stdout, \$stderr;
+my $stderr = capture_stderr { $mod -> dump };
 
 my $expected = <<'EOS';
 ; ModuleID = 'test2'
