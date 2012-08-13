@@ -1,6 +1,7 @@
 #!perl -T
 
 use Test::More;
+use File::Slurp;
 use Capture::Tiny 'capture_stderr';
 
 use LLVM;
@@ -62,5 +63,39 @@ is($res1 -> to_int, 15);
 
 my $res2 = $eng -> run_func($fun, $arg2, $arg1);
 is($res2 -> to_int, 15);
+
+my $targets = LLVM::Target -> targets;
+
+my $tm = LLVM::TargetMachine -> create(
+	$targets -> [0], 'x86_64-linux-gnu',
+	'penryn', ['64bit', '64bit-mode', 'avx']
+);
+
+$tm -> emit($mod, 't/cond.out', 0);
+
+$expected = <<'EOS';
+	.file	"test2"
+	.text
+	.globl	test2
+	.align	16, 0x90
+	.type	test2,@function
+test2:
+	.cfi_startproc
+	cmpl	%esi, %edi
+	jbe	.LBB0_2
+	movl	%edi, %eax
+	ret
+.LBB0_2:
+	movl	%esi, %eax
+	ret
+.Ltmp0:
+	.size	test2, .Ltmp0-test2
+	.cfi_endproc
+
+
+	.section	".note.GNU-stack","",@progbits
+EOS
+
+is(read_file('t/cond.out'), $expected);
 
 done_testing;

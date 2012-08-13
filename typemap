@@ -8,6 +8,9 @@ PassManager				T_LLVM_REF
 GenericValue				T_LLVM_REF
 ExecutionEngine				T_LLVM_REF
 
+Target					T_LLVM_REF
+TargetMachine				T_LLVM_REF
+
 OUTPUT
 T_LLVM_REF
 	sv_setref_pv($arg, \"LLVM::${type}\", (void *) $var);

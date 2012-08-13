@@ -2,4 +2,3 @@
 * more types + const (struct, array, ...)
 * more instructions
 * analysis passes
-* assembly generation (TargetMachine)
