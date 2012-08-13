@@ -9,21 +9,21 @@ create(class, target, triple, cpu, features)
 	AV *features
 
 	CODE:
-		STRLEN len1, len2;
 		int i, count = av_len(features) + 1;
 		char **features_str = malloc(sizeof(char *) * count);
 
 		for (i = 0; i < count; i++) {
-			STRLEN ll;
 			SV *cur = av_shift(features);
-			const char *f = SvPVbyte(cur, ll);
+			const char *f = SvPVbyte_nolen(cur);
 
 			features_str[i] = f;
 		}
 
 		RETVAL = LLVMCreateTargetMachine(
-			target, SvPVbyte(triple, len1),
-			SvPVbyte(cpu, len2), *features_str,
+			target,
+			SvPVbyte_nolen(triple),
+			SvPVbyte_nolen(cpu),
+			*features_str,
 			LLVMCodeGenLevelDefault,
 			LLVMRelocDefault,
 			LLVMCodeModelDefault

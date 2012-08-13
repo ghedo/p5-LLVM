@@ -15,8 +15,7 @@ set_name(self, val_name)
 	SV *val_name
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(val_name, len);
+		const char *name = SvPVbyte_nolen(val_name);
 
 		LLVMSetValueName(self, name);
 
@@ -51,8 +50,7 @@ func_append(self, block_name)
 	SV *block_name
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(block_name, len);
+		const char *name = SvPVbyte_nolen(block_name);
 
 		RETVAL = LLVMAppendBasicBlock(self, name);
 

@@ -6,8 +6,7 @@ new(class, id)
 	SV *id
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(id, len);
+		const char *name = SvPVbyte_nolen(id);
 
 		RETVAL = LLVMModuleCreateWithName(name);
 
@@ -20,8 +19,7 @@ add_func(self, func_name, func_type)
 	Type func_type
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(func_name, len);
+		const char *name = SvPVbyte_nolen(func_name);
 
 		RETVAL = LLVMAddFunction(self, name, func_type);
 
@@ -33,8 +31,7 @@ get_func(self, func_name)
 	SV *func_name
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(func_name, len);
+		const char *name = SvPVbyte_nolen(func_name);
 
 		RETVAL = LLVMGetNamedFunction(self, name);
 
@@ -55,8 +52,7 @@ add_global(self, global_name, global_type)
 	Type global_type
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(global_name, len);
+		const char *name = SvPVbyte_nolen(global_name);
 
 		RETVAL = LLVMAddGlobal(self, global_type, name);
 
@@ -68,8 +64,7 @@ get_global(self, global_name)
 	SV *global_name
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(global_name, len);
+		const char *name = SvPVbyte_nolen(global_name);
 
 		RETVAL = LLVMGetNamedGlobal(self, name);
 

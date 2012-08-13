@@ -1,6 +1,6 @@
 MODULE = LLVM				PACKAGE = LLVM::Builder
 
-#define BIN_OP(FN) FN(self, lhs, rhs, SvPVbyte(inst_name, len))
+#define BIN_OP(FN) FN(self, lhs, rhs, SvPVbyte_nolen(inst_name))
 
 Builder
 new(class, blk)
@@ -68,7 +68,7 @@ add(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildAdd);
+		RETVAL = BIN_OP(LLVMBuildAdd);
 
 	OUTPUT: RETVAL
 
@@ -80,7 +80,7 @@ fadd(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildFAdd);
+		RETVAL = BIN_OP(LLVMBuildFAdd);
 
 	OUTPUT: RETVAL
 
@@ -92,7 +92,7 @@ mul(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildMul);
+		RETVAL = BIN_OP(LLVMBuildMul);
 
 	OUTPUT: RETVAL
 
@@ -104,7 +104,7 @@ fmul(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildFMul);
+		RETVAL = BIN_OP(LLVMBuildFMul);
 
 	OUTPUT: RETVAL
 
@@ -116,7 +116,7 @@ sub(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildSub);
+		RETVAL = BIN_OP(LLVMBuildSub);
 
 	OUTPUT: RETVAL
 
@@ -128,7 +128,7 @@ fsub(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildFSub);
+		RETVAL = BIN_OP(LLVMBuildFSub);
 
 	OUTPUT: RETVAL
 
@@ -140,7 +140,7 @@ udiv(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildUDiv);
+		RETVAL = BIN_OP(LLVMBuildUDiv);
 
 	OUTPUT: RETVAL
 
@@ -152,7 +152,7 @@ sdiv(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildSDiv);
+		RETVAL = BIN_OP(LLVMBuildSDiv);
 
 	OUTPUT: RETVAL
 
@@ -164,7 +164,7 @@ fdiv(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildFDiv);
+		RETVAL = BIN_OP(LLVMBuildFDiv);
 
 	OUTPUT: RETVAL
 
@@ -178,7 +178,7 @@ shl(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildShl);
+		RETVAL = BIN_OP(LLVMBuildShl);
 
 	OUTPUT: RETVAL
 
@@ -190,7 +190,7 @@ lshr(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildLShr);
+		RETVAL = BIN_OP(LLVMBuildLShr);
 
 	OUTPUT: RETVAL
 
@@ -202,7 +202,7 @@ ashr(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildAShr);
+		RETVAL = BIN_OP(LLVMBuildAShr);
 
 	OUTPUT: RETVAL
 
@@ -214,7 +214,7 @@ and(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildAnd);
+		RETVAL = BIN_OP(LLVMBuildAnd);
 
 	OUTPUT: RETVAL
 
@@ -226,7 +226,7 @@ or(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildOr);
+		RETVAL = BIN_OP(LLVMBuildOr);
 
 	OUTPUT: RETVAL
 
@@ -238,7 +238,7 @@ xor(self, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len; RETVAL = BIN_OP(LLVMBuildXor);
+		RETVAL = BIN_OP(LLVMBuildXor);
 
 	OUTPUT: RETVAL
 
@@ -253,9 +253,8 @@ icmp(self, pred, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len;
 		LLVMIntPredicate ipred;
-		char *spred = SvPVbyte(pred, len);
+		char *spred = SvPVbyte_nolen(pred);
 
 		if (strncmp(spred, "eq", 2) == 0)
 			ipred = LLVMIntEQ;
@@ -281,7 +280,7 @@ icmp(self, pred, lhs, rhs, inst_name)
 			Perl_croak(aTHX_ "invalid predicate '%s'\n", spred);
 
 		RETVAL = LLVMBuildICmp(
-			self, ipred, lhs, rhs, SvPVbyte(inst_name, len)
+			self, ipred, lhs, rhs, SvPVbyte_nolen(inst_name)
 		);
 
 	OUTPUT: RETVAL
@@ -295,9 +294,8 @@ fcmp(self, pred, lhs, rhs, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len;
 		LLVMRealPredicate rpred;
-		char *spred = SvPVbyte(pred, len);
+		char *spred = SvPVbyte_nolen(pred);
 
 		if (strncmp(spred, "false", 5) == 0)
 			rpred = LLVMRealPredicateFalse;
@@ -335,7 +333,7 @@ fcmp(self, pred, lhs, rhs, inst_name)
 			Perl_croak(aTHX_ "invalid predicate '%s'\n", spred);
 
 		RETVAL = LLVMBuildFCmp(
-			self, rpred, lhs, rhs, SvPVbyte(inst_name, len)
+			self, rpred, lhs, rhs, SvPVbyte_nolen(inst_name)
 		);
 
 	OUTPUT: RETVAL
@@ -348,8 +346,7 @@ call(self, func, inst_name, ...)
 
 	CODE:
 		int i;
-		STRLEN len;
-		const char *name = SvPVbyte(inst_name, len);
+		const char *name = SvPVbyte_nolen(inst_name);
 
 		Value *params = malloc(sizeof(Value) * (items - 3));
 
@@ -380,8 +377,7 @@ select(self, cond, th, el, inst_name)
 	SV *inst_name
 
 	CODE:
-		STRLEN len;
-		const char *name = SvPVbyte(inst_name, len);
+		const char *name = SvPVbyte_nolen(inst_name);
 
 		RETVAL = LLVMBuildSelect(self, cond, th, el, name);
 

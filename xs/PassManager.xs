@@ -24,8 +24,7 @@ void add(self, pass, ...)
 	SV *pass
 
 	CODE:
-		STRLEN len;
-		char *spass = SvPVbyte(pass, len);
+		char *spass = SvPVbyte_nolen(pass);
 
 		# FIXME: find a less ugly way of doing this
 
