@@ -39,11 +39,10 @@ emit(self, mod, file, to_object)
 	bool to_object
 
 	CODE:
-		STRLEN len;
 		char *err;
 
 		bool rc = LLVMTargetMachineEmitToFile(
-			self, mod, SvPVbyte(file, len),
+			self, mod, SvPVbyte_nolen(file),
 			(to_object ? LLVMObjectFile : LLVMAssemblyFile), &err
 		);
 
