@@ -3,17 +3,23 @@ MODULE = LLVM				PACKAGE = LLVM::Builder
 #define BIN_OP(FN) FN(self, lhs, rhs, SvPVbyte_nolen(inst_name))
 
 Builder
-new(class, blk)
+new(class)
 	SV *class
-	BasicBlock blk
 
 	CODE:
 		Builder bld = LLVMCreateBuilder();
-		LLVMPositionBuilderAtEnd(bld, blk);
 
 		RETVAL = bld;
 
 	OUTPUT: RETVAL
+
+void
+position_at_end(self, blk)
+	Builder self
+	BasicBlock blk
+
+	CODE:
+		LLVMPositionBuilderAtEnd(self, blk);
 
 # Terminators
 

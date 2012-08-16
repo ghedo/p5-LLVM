@@ -30,9 +30,13 @@ LLVM - Perl bindings to the Low Level Virtual Machine
     $params -> [0] -> set_name("x");
     $params -> [1] -> set_name("y");
 
-    # create a new entry block for the "add" function and its builder
+    # create a new instruction builder
+    my $bld = LLVM::Builder -> new;
+
+    # create a new entry block for the "add" function and position the
+    # builder at its end
     my $blk = $fun -> func_append("entry");
-    my $bld = LLVM::Builder -> new($blk);
+    $bld -> position_at_end($blk);
 
     # create an "add" intruction and use its return value as function return
     my $tmp = $bld -> add($params -> [0], $params -> [1], "tmp");

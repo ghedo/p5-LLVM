@@ -14,9 +14,13 @@ within a basic block.
 
 =head1 METHODS
 
-=head2 new( $blk )
+=head2 new( )
 
-Create a new C<LLVM::Builder> object given a L<LLVM::BasicBlock>.
+Create a new C<LLVM::Builder> object.
+
+=head2 position_at_end( $blk )
+
+Postion the C<LLVM::Builder> at the end of the given L<LLVM::BasicBlock>.
 
 =head1 TERMINATOR INSTRUCTIONS
 

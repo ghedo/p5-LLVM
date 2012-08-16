@@ -7,6 +7,7 @@ use Capture::Tiny 'capture_stderr';
 use LLVM;
 
 my $mod = LLVM::Module -> new("test1");
+my $bld = LLVM::Builder -> new;
 
 my $intt = LLVM::Type -> int(32);
 my $funt = LLVM::Type -> func($intt, $intt, $intt, $intt);
@@ -20,7 +21,8 @@ $params -> [1] -> set_name("y");
 $params -> [2] -> set_name("z");
 
 my $blk = $fun -> func_append("entry");
-my $bld = LLVM::Builder -> new($blk);
+
+$bld -> position_at_end($blk);
 
 my $tmp1 = $bld -> add($params -> [0], $params -> [1], "tmp1");
 my $tmp2 = $bld -> mul($tmp1, $params -> [2], "tmp2");
