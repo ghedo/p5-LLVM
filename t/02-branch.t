@@ -16,8 +16,8 @@ my $fun = $mod -> add_func("test2", $funt);
 
 my $params = $fun -> func_params;
 
-$params -> [0] -> set_name("x");
-$params -> [1] -> set_name("y");
+$params -> [0] -> name("x");
+$params -> [1] -> name("y");
 
 my $blk = $fun -> func_append("entry");
 $bld -> position_at_end($blk);

@@ -17,9 +17,10 @@ A C<LLVM::Value> represents an individual value in the LLVM IR.
 
 Retrieve the L<LLVM::Type> of the given C<LLVM::Value>.
 
-=head2 set_name( $val_name )
+=head2 name( [ $val_name ] )
 
-Set the name of the given C<LLVM::Value> to the C<$val_name> string.
+Get the name of the given C<LLVM::Value>. If C<$val_name> is set, the name of
+the value will be set to its value.
 
 =head2 func_params( )
 

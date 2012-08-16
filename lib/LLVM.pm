@@ -27,8 +27,8 @@ LLVM - Perl bindings to the Low Level Virtual Machine
     # set function's parameters names
     my $params = $fun -> func_params;
 
-    $params -> [0] -> set_name("x");
-    $params -> [1] -> set_name("y");
+    $params -> [0] -> name("x");
+    $params -> [1] -> name("y");
 
     # create a new instruction builder
     my $bld = LLVM::Builder -> new;

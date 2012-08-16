@@ -9,15 +9,24 @@ type(self)
 
 	OUTPUT: RETVAL
 
-void
-set_name(self, val_name)
+SV *
+name(self, ...)
 	Value self
-	SV *val_name
 
 	CODE:
-		const char *name = SvPVbyte_nolen(val_name);
+		const char *name;
 
-		LLVMSetValueName(self, name);
+		if (items == 2) {
+			SV *val = ST(1);
+			const char *name = SvPVbyte_nolen(val);
+			LLVMSetValueName(self, name);
+		}
+
+		name = LLVMGetValueName(self);
+
+		RETVAL = newSVpv(name, 0);
+
+	OUTPUT: RETVAL
 
 AV *
 func_params(self)
