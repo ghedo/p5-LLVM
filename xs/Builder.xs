@@ -64,6 +64,13 @@ cond(self, cond, th, el)
 
 	OUTPUT: RETVAL
 
+void
+unreachable(self)
+	Builder self
+
+	CODE:
+		LLVMBuildUnreachable(self);
+
 # Binary operations
 
 Value
@@ -245,6 +252,23 @@ xor(self, lhs, rhs, inst_name)
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildXor);
+
+	OUTPUT: RETVAL
+
+# Conversion
+
+Value
+trunc(self, ty, value, out, name)
+	Builder self
+	Type ty
+	Value value
+	Type ty2
+
+	CODE:
+		RETVAL = LLVMBuildTrunc(
+			self, ty, value, out,
+			SvPVbyte_nolen(name)
+		);
 
 	OUTPUT: RETVAL
 

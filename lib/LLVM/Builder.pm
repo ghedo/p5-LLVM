@@ -48,6 +48,10 @@ L<LLVM::Value> C<$if> representing the condition (e.g. it can be the value
 returned by a icmp or fcmp instruction) and two L<LLVM::BasicBlock>: the first
 executed if the condition is true, the second executed otherwise.
 
+=head2 unreachable( )
+
+Append an unreachable instruction to the block.
+
 =head1 BINARY OPERATIONS
 
 The binary operations require two arguments of the same L<LLVM::Type> and
@@ -123,6 +127,16 @@ Append an or instruction to the block and name the result C<$name>.
 =head2 xor( $lhs, $rhs, $name )
 
 Append a xor instruction to the block and name the result C<$name>.
+
+=head1 CONVERSION OPERATIONS
+
+See the L<LLVM reference|http://llvm.org/docs/LangRef.html#otherops> for more
+information about the single instructions.
+
+=head2 trunc( $ty, $value, $out, $name)
+
+Append a trunc instruction which takes a L<LLVM::Type> and a L<LLVM::Value> of
+that type, and an output L<LLVM::Type>. Name the result C<$name>.
 
 =head1 OTHER OPERATIONS
 
