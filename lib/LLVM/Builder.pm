@@ -133,10 +133,10 @@ Append a xor instruction to the block and name the result C<$name>.
 See the L<LLVM reference|http://llvm.org/docs/LangRef.html#otherops> for more
 information about the single instructions.
 
-=head2 trunc( $ty, $value, $out, $name)
+=head2 trunc( $ty, $value, $out, $name )
 
-Append a trunc instruction which takes a L<LLVM::Type> and a L<LLVM::Value> of
-that type, and an output L<LLVM::Type>. Name the result C<$name>.
+Append a trunc instruction which takes a L<LLVM::Value> and the conversion
+output L<LLVM::Type>, and name the result C<$name>.
 
 =head1 OTHER OPERATIONS
 

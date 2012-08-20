@@ -258,16 +258,15 @@ xor(self, lhs, rhs, result)
 # Conversion
 
 Value
-trunc(self, ty, value, out, name)
+trunc(self, value, out, result)
 	Builder self
-	Type ty
 	Value value
-	Type ty2
+	Type out
+	SV *result
 
 	CODE:
 		RETVAL = LLVMBuildTrunc(
-			self, ty, value, out,
-			SvPVbyte_nolen(name)
+			self, value, out, SvPVbyte_nolen(result)
 		);
 
 	OUTPUT: RETVAL
