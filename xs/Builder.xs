@@ -1,6 +1,6 @@
 MODULE = LLVM				PACKAGE = LLVM::Builder
 
-#define BIN_OP(FN) FN(self, lhs, rhs, SvPVbyte_nolen(inst_name))
+#define BIN_OP(FN) FN(self, lhs, rhs, SvPVbyte_nolen(result))
 
 Builder
 new(class)
@@ -74,11 +74,11 @@ unreachable(self)
 # Binary operations
 
 Value
-add(self, lhs, rhs, inst_name)
+add(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildAdd);
@@ -86,11 +86,11 @@ add(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-fadd(self, lhs, rhs, inst_name)
+fadd(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildFAdd);
@@ -98,11 +98,11 @@ fadd(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-mul(self, lhs, rhs, inst_name)
+mul(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildMul);
@@ -110,11 +110,11 @@ mul(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-fmul(self, lhs, rhs, inst_name)
+fmul(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildFMul);
@@ -122,11 +122,11 @@ fmul(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-sub(self, lhs, rhs, inst_name)
+sub(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildSub);
@@ -134,11 +134,11 @@ sub(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-fsub(self, lhs, rhs, inst_name)
+fsub(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildFSub);
@@ -146,11 +146,11 @@ fsub(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-udiv(self, lhs, rhs, inst_name)
+udiv(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildUDiv);
@@ -158,11 +158,11 @@ udiv(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-sdiv(self, lhs, rhs, inst_name)
+sdiv(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildSDiv);
@@ -170,11 +170,11 @@ sdiv(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-fdiv(self, lhs, rhs, inst_name)
+fdiv(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildFDiv);
@@ -184,11 +184,11 @@ fdiv(self, lhs, rhs, inst_name)
 # Binary bitwise operations
 
 Value
-shl(self, lhs, rhs, inst_name)
+shl(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildShl);
@@ -196,11 +196,11 @@ shl(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-lshr(self, lhs, rhs, inst_name)
+lshr(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildLShr);
@@ -208,11 +208,11 @@ lshr(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-ashr(self, lhs, rhs, inst_name)
+ashr(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildAShr);
@@ -220,11 +220,11 @@ ashr(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-and(self, lhs, rhs, inst_name)
+and(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildAnd);
@@ -232,11 +232,11 @@ and(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-or(self, lhs, rhs, inst_name)
+or(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildOr);
@@ -244,11 +244,11 @@ or(self, lhs, rhs, inst_name)
 	OUTPUT: RETVAL
 
 Value
-xor(self, lhs, rhs, inst_name)
+xor(self, lhs, rhs, result)
 	Builder self
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		RETVAL = BIN_OP(LLVMBuildXor);
@@ -275,12 +275,12 @@ trunc(self, ty, value, out, name)
 # Misc
 
 Value
-icmp(self, pred, lhs, rhs, inst_name)
+icmp(self, pred, lhs, rhs, result)
 	Builder self
 	SV *pred
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		LLVMIntPredicate ipred;
@@ -310,18 +310,18 @@ icmp(self, pred, lhs, rhs, inst_name)
 			Perl_croak(aTHX_ "invalid predicate '%s'\n", spred);
 
 		RETVAL = LLVMBuildICmp(
-			self, ipred, lhs, rhs, SvPVbyte_nolen(inst_name)
+			self, ipred, lhs, rhs, SvPVbyte_nolen(result)
 		);
 
 	OUTPUT: RETVAL
 
 Value
-fcmp(self, pred, lhs, rhs, inst_name)
+fcmp(self, pred, lhs, rhs, result)
 	Builder self
 	SV *pred
 	Value lhs
 	Value rhs
-	SV *inst_name
+	SV *result
 
 	CODE:
 		LLVMRealPredicate rpred;
@@ -363,20 +363,20 @@ fcmp(self, pred, lhs, rhs, inst_name)
 			Perl_croak(aTHX_ "invalid predicate '%s'\n", spred);
 
 		RETVAL = LLVMBuildFCmp(
-			self, rpred, lhs, rhs, SvPVbyte_nolen(inst_name)
+			self, rpred, lhs, rhs, SvPVbyte_nolen(result)
 		);
 
 	OUTPUT: RETVAL
 
 Value
-call(self, func, inst_name, ...)
+call(self, func, result, ...)
 	Builder self
 	Value func
-	SV *inst_name
+	SV *result
 
 	CODE:
 		int i;
-		const char *name = SvPVbyte_nolen(inst_name);
+		const char *name = SvPVbyte_nolen(result);
 
 		Value *params = malloc(sizeof(Value) * (items - 3));
 
@@ -399,15 +399,15 @@ call(self, func, inst_name, ...)
 	OUTPUT: RETVAL
 
 Value
-select(self, cond, th, el, inst_name)
+select(self, cond, th, el, result)
 	Builder self
 	Value cond
 	Value th
 	Value el
-	SV *inst_name
+	SV *result
 
 	CODE:
-		const char *name = SvPVbyte_nolen(inst_name);
+		const char *name = SvPVbyte_nolen(result);
 
 		RETVAL = LLVMBuildSelect(self, cond, th, el, name);
 
