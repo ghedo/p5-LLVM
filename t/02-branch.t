@@ -53,7 +53,7 @@ false:                                            ; preds = %entry
 }
 EOS
 
-is($stderr, $expected);
+is $stderr, $expected;
 
 my $arg1 = LLVM::GenericValue -> int($intt, 10);
 my $arg2 = LLVM::GenericValue -> int($intt, 15);
@@ -61,10 +61,10 @@ my $arg2 = LLVM::GenericValue -> int($intt, 15);
 my $eng = LLVM::ExecutionEngine -> new($mod);
 
 my $res1 = $eng -> run_func($fun, $arg1, $arg2);
-is($res1 -> to_int, 15);
+is $res1 -> to_int, 15;
 
 my $res2 = $eng -> run_func($fun, $arg2, $arg1);
-is($res2 -> to_int, 15);
+is $res2 -> to_int, 15;
 
 my $targets = LLVM::Target -> targets;
 
@@ -98,6 +98,6 @@ test2:
 	.section	".note.GNU-stack","",@progbits
 EOS
 
-is(read_file('t/cond.out'), $expected);
+is read_file('t/cond.out'), $expected;
 
 done_testing;

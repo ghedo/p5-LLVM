@@ -17,13 +17,13 @@ my $fun = $mod -> add_func("test1", $funt);
 my $params = $fun -> func_params;
 
 $params -> [0] -> name("x");
-is($params -> [0] -> name, "x");
+is $params -> [0] -> name, "x";
 
 $params -> [1] -> name("y");
-is($params -> [1] -> name, "y");
+is $params -> [1] -> name, "y";
 
 $params -> [2] -> name("z");
-is($params -> [2] -> name, "z");
+is $params -> [2] -> name, "z";
 
 my $blk = $fun -> func_append("entry");
 
@@ -47,7 +47,7 @@ entry:
 }
 EOS
 
-is($stderr, $expected);
+is $stderr, $expected;
 
 my $pass = LLVM::PassManager -> new;
 
@@ -110,7 +110,7 @@ define i32 @test1(i32, i32, i32) nounwind readnone {
 }
 EOS
 
-is($stderr, $expected);
+is $stderr, $expected;
 
 my $arg1 = LLVM::GenericValue -> int($intt, 10);
 my $arg2 = LLVM::GenericValue -> int($intt, 15);
@@ -120,7 +120,7 @@ my $eng = LLVM::ExecutionEngine -> new($mod);
 
 my $res = $eng -> run_func($fun, $arg1, $arg2, $arg3);
 
-is($res -> to_int, 500);
+is $res -> to_int, 500;
 
 my $targets = LLVM::Target -> targets;
 
@@ -149,6 +149,6 @@ test1:
 	.section	".note.GNU-stack","",@progbits
 EOS
 
-is(read_file('t/basic.out'), $expected);
+is read_file('t/basic.out'), $expected;
 
 done_testing;
