@@ -12,8 +12,12 @@ unless (which($llvmc)) { print "Can't find \"$llvmc\"\n"; exit }
 override _build_MakeFile_PL_template => sub {
 	my ($self) = @_;
 
-	my $template  = "use Devel::CheckLib;\n";
-	$template .= "check_lib_or_exit(lib => 'LLVM-3.1');\n";
+	my $template = <<'TEMPLATE';
+use Devel::CheckLib;
+
+check_lib_or_exit(lib => 'LLVM-3.1');
+
+TEMPLATE
 
 	return $template.super();
 };
