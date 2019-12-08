@@ -36,6 +36,10 @@ $bld -> ret($tmp2);
 
 my $stderr = capture_stderr { $mod -> dump };
 
+is $fun->name, "test1", "check name";
+
+$stderr =~ s/^source_filename = "test1"\n//m;
+
 my $expected = <<'EOS';
 ; ModuleID = 'test1'
 
@@ -47,7 +51,7 @@ entry:
 }
 EOS
 
-is $stderr, $expected;
+is $stderr, $expected, "expected llvm code";
 
 my $pass = LLVM::PassManager -> new;
 
@@ -100,6 +104,19 @@ $pass -> run($mod);
 
 $stderr = capture_stderr { $mod -> dump };
 
+# LLVM 7 and maybe earlier adds this
+$stderr =~ s/^source_filename = "test1"\n//m;
+$stderr =~ s/^; Function Attrs: (?:norecurse )?nounwind readnone\n//m;
+
+# later LLVM loses the function name?
+# Possibly since we're doing module global optimization
+$stderr =~ s/internal i32 \@0/i32 \@test1/;
+
+#$stderr =~ s/local_unnamed_addr #0//;
+if ($stderr =~ s/\nattributes #0 = \{ (?:norecurse )?nounwind readnone \}\n//m) {
+    $stderr =~ s/\) (?:local_unnamed_addr )?#0 \{/) nounwind readnone {/;
+}
+
 $expected = <<'EOS';
 ; ModuleID = 'test1'
 
@@ -123,9 +140,12 @@ my $res = $eng -> run_func($fun, $arg1, $arg2, $arg3);
 is $res -> to_int, 500;
 
 my $targets = LLVM::Target -> targets;
+note '"', $_->name, '" - ', $_->description for @$targets;
+my ($x86_64) = grep $_->name eq 'x86-64', @$targets;
+note "using ", $x86_64->name, ": ", $x86_64->description;
 
 my $tm = LLVM::TargetMachine -> create(
-	$targets -> [0], 'x86_64-linux-gnu',
+	$x86_64, 'x86_64-linux-gnu',
 	'penryn', ['64bit', '64bit-mode', 'avx']
 );
 
@@ -149,6 +169,26 @@ test1:
 	.section	".note.GNU-stack","",@progbits
 EOS
 
-is read_file('t/basic.out'), $expected;
+my $basic = read_file('t/basic.out');
+
+# later LLVM swaps the .text and .file
+# and loses the function name
+$basic =~ s/(\t\.text\n)(\t\.file\t"test1"\n)/$2$1\t.globl\ttest1\n/;
+# different alignment directive
+$basic =~ s/\.p2align\t4\b/\.align\t16/;
+# loss of function name
+$basic =~ s/__unnamed_1/test1/g;
+# different end of function symbol
+$basic =~ s/\.Lfunc_end0\b/\.Ltmp0/g;
+# better code gen in later LLVM
+# addl is replaced with lea and the result ends up in
+# %eax without the need for the movl
+$basic =~ s/\tleal\t\(%rdi,%rsi\), %eax
+\timull\t%edx, %eax/\taddl\t%esi, %edi
+\timull\t%edx, %edi
+\tmovl\t%edi, %eax/;
+$basic =~ s/\bretq\b/ret/;
+
+is($basic, $expected,);
 
 done_testing;

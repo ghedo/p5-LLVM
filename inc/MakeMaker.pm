@@ -26,6 +26,7 @@ my $define = "-DLLVM_REV=$rev -DLLVM_MAJ=$maj -DLLVM_MIN=$min";
 {{ $perl_prereq ? qq[BEGIN { require $perl_prereq; }] : ''; }}
 use strict;
 use warnings;
+use Config;
 use ExtUtils::MakeMaker {{ $eumm_version }};
 {{ $share_dir_block[0] }}
 my {{ $WriteMakefileArgs }}
@@ -35,9 +36,31 @@ $WriteMakefileArgs{CCFLAGS} = $ccflags;
 my $libs = `$llvmc --ldflags --libs --system-libs`
   or die "$llvmc failed to return library info\n";
 $libs =~ tr/\n\r/ /s;
-if (split(' ', $libs) > 5) {
-  print "llvm-config is trying a static build, ignoring it\n";
-  $libs = "-lLLVM";
+if ($libs =~ /$Config{_a}\b/) {
+  print "llvm-config is trying a static build, ignoring it and looking for the .so\n";
+  undef $libs;
+  my @comps = ( $rev, $maj, $min );
+  my $ldflags = `$llvmc --ldflags`; # to get any -L
+  chomp $ldflags;
+  my @paths = map substr($_, 2), grep /^-L/, split ' ', $ldflags;
+  while (@comps) {
+    my $name = "LLVM-".join(".", @comps);
+    if (check_lib(lib => $name,
+                  libpath => \@paths)) {
+      $libs = "$ldflags -l$name";
+      last;
+    }
+    pop @comps;
+  }
+  unless ($libs) {
+    if (check_lib(lib => "LLVM",
+                  libpath => \@paths)) {
+      $libs = "$ldflags -lLLVM";
+    }
+    else {
+      die "No LLVM library found\n";
+    }
+  }
 }
 $WriteMakefileArgs{LIBS} = "$libs";
 $WriteMakefileArgs{DEFINE} = $define;
