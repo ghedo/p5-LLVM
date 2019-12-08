@@ -6,6 +6,7 @@
 
 #include <llvm-c/Transforms/IPO.h>
 #include <llvm-c/Transforms/Scalar.h>
+#include <llvm-c/Transforms/Utils.h>
 #include <llvm-c/Transforms/Vectorize.h>
 
 typedef LLVMModuleRef		Module;
