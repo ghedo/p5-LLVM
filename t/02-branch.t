@@ -37,6 +37,9 @@ $bld -> cond($cmp, $true_blk, $false_blk);
 
 my $stderr = capture_stderr { $mod -> dump };
 
+# LLVM 7 (and maybe earlier) adds some extra
+$stderr =~ s/^source_filename = "test2"\n//m;
+
 my $expected = <<'EOS';
 ; ModuleID = 'test2'
 
@@ -68,8 +71,9 @@ is $res2 -> to_int, 15;
 
 my $targets = LLVM::Target -> targets;
 
+my ($x86_64) = grep $_->name eq 'x86-64', @$targets;
 my $tm = LLVM::TargetMachine -> create(
-	$targets -> [0], 'x86_64-linux-gnu',
+	$x86_64, 'x86_64-linux-gnu',
 	'penryn', ['64bit', '64bit-mode', 'avx']
 );
 
@@ -98,6 +102,12 @@ test2:
 	.section	".note.GNU-stack","",@progbits
 EOS
 
-is read_file('t/cond.out'), $expected;
+my $code = read_file('t/cond.out');
+# .text and .file lines swapped
+$code =~ s/^(\s+\.text\n)(\s+\.file\s+"test2"\n)/$2$1/;
+$code =~ s/\.p2align\t4/.align\t16/;
+$code =~ s/\.Lfunc_end0\b/.Ltmp0/g;
+$code =~ s/\bretq\b/ret/g;
+is $code, $expected;
 
 done_testing;

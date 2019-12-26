@@ -116,7 +116,11 @@ void add(self, pass, ...)
 			LLVMAddBasicAliasAnalysisPass(self);
 		# Vectorize transformations
 		else if (strcmp(spass, "BBVectorize") == 0)
-			LLVMAddBBVectorizePass(self);
+#if LLVM_REV < 5
+                    LLVMAddBBVectorizePass(self);
+#else
+                    LLVMAddSLPVectorizePass(self);
+#endif
 		else
 			Perl_croak(aTHX_ "invalid pass '%s'", spass);
 

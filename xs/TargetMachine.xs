@@ -10,7 +10,7 @@ create(class, target, triple, cpu, features)
 
 	CODE:
 		int i, count = av_len(features) + 1;
-		char **features_str = malloc(sizeof(char *) * count);
+		const char **features_str = malloc(sizeof(char *) * count);
 
 		for (i = 0; i < count; i++) {
 			SV *cur = av_shift(features);
